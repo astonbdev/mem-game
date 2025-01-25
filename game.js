@@ -11,6 +11,13 @@ export class Game{
       this.board = this.generateBoard();
   }
 
+  /**
+   * generates 2d array containing the state values of the board.
+   * these values are all initially colors from the COLORS global
+   * values will change to null when the board has 
+   * 
+   * @returns string[][]
+   */
   generateBoard(){
     const boardValues = this.shuffle(COLORS);
 
@@ -27,6 +34,11 @@ export class Game{
     return board;
   }
 
+  /**
+   * shuffles and returns input items
+   * @param {*} items 
+   * @returns new array of shuffled items
+   */
   shuffle(items){
     // Create a copy of the array to avoid mutating the original
     const shuffledItems = [...items, ...items];
@@ -43,12 +55,35 @@ export class Game{
     return shuffledItems;
   }
 
-  areCellsSameColor(cell1, cell2){
-    if(this.board[cell1.row][cell2.col] === this.board[cell2.row][cell2.col]){
+  /**
+   * Plays a turn. If the input cells have matching states or colors,
+   * updates the game board cells to be null values, as they have been selected and
+   * correctly identified
+   * 
+   * returns bool if the play was correct or not
+   * @param {row: int, col: int} cell1 
+   * @param {row: int, col: int} cell2 
+   * @returns bool
+   */
+  playCells(cell1, cell2){
+    if(this.board[cell1.row][cell1.col] === this.board[cell2.row][cell2.col]){
+      this.board[cell1.row][cell1.col] = null;
+      this.board[cell2.row][cell2.col] = null;
+
       return true;
     }
 
     return false;
+  }
+
+  /**
+   * returns state of the board cell
+   * 
+   * @param {row: int, col: int} cell 
+   * @returns 
+   */
+  getCellState(cell){
+    return this.board[cell.row][cell.col]
   }
 
 }

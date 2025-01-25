@@ -63,17 +63,40 @@ export class Game{
    * returns bool if the play was correct or not
    * @param {row: int, col: int} cell1 
    * @param {row: int, col: int} cell2 
-   * @returns bool
+   * @returns object like: {correctPlay: bool, gameOver: bool}
    */
   playCells(cell1, cell2){
     if(this.board[cell1.row][cell1.col] === this.board[cell2.row][cell2.col]){
       this.board[cell1.row][cell1.col] = null;
       this.board[cell2.row][cell2.col] = null;
 
-      return true;
+      const gameOver = this.checkGameOver
+
+      return {
+        correctPlay: true,
+        gameOver: gameOver
+      }
     }
 
-    return false;
+    return {
+      correctPlay: false,
+      gameOver: false
+    }
+  }
+
+  /**
+   * Tests for game over
+   * game is over if every cell on the board is null
+   * @returns bool
+   */
+  checkGameOver(){
+    for(let row of this.board){
+      for(let col of this.board[row]){
+        if(col !== null) return false;
+      }
+    }
+
+    return true;
   }
 
   /**

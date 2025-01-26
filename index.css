@@ -1,4 +1,12 @@
 .cell{
   width: 200px;
   height: 200px;
+  margin: 10px;
+  
+  display: inline-block;
+}
+
+.game-container{
+  display: flex;
+  flex-direction: column;
 }

@@ -1,5 +1,3 @@
-import { Game } from "./game.js"
-
 export default function createBoard(game){
   for(let row = 0; row < game.height; row++){
     const $cellRow = document.createElement("div");

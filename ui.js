@@ -8,7 +8,6 @@ export default function createBoard(game){
       const cell = {row: row, col: col}
       const $cell = document.createElement("div");
 
-      $cell.style.backgroundColor = game.getCellState(cell);
       $cell.classList.add("cell");
       
       $cellRow.appendChild($cell);

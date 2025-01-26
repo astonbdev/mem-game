@@ -65,12 +65,13 @@ export class Game{
    * @param {row: int, col: int} cell2 
    * @returns object like: {correctPlay: bool, gameOver: bool}
    */
-  playCells(cell1, cell2){
+  playCells(cells){
+    const [cell1, cell2] = cells
     if(this.board[cell1.row][cell1.col] === this.board[cell2.row][cell2.col]){
       this.board[cell1.row][cell1.col] = null;
       this.board[cell2.row][cell2.col] = null;
 
-      const gameOver = this.checkGameOver
+      const gameOver = this.checkGameOver();
 
       return {
         correctPlay: true,
@@ -91,7 +92,7 @@ export class Game{
    */
   checkGameOver(){
     for(let row of this.board){
-      for(let col of this.board[row]){
+      for(let col of row){
         if(col !== null) return false;
       }
     }

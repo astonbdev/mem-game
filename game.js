@@ -1,5 +1,3 @@
-console.log("Hello from game.js!");
-
 const COLORS = ["red", "blue", "green", "yellow", "purple", "orange"];
 
 export class Game{

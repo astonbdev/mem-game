@@ -2,7 +2,9 @@ import { Game } from "./game.js";
 
 const game = new Game();
 
-let activeCells = 0;
+const $gameContainer = document.getElementById("Game-Container");
+
+let activeCells = [];
 
 export default function createBoard(){
   for(let row = 0; row < game.height; row++){
@@ -34,7 +36,45 @@ function clickCell(evt){
   if(cellState === null) return;
 
   $cell.style.backgroundColor = cellState;
+  activeCells.push(cellCoords);
+
+
+  if(activeCells.length < 2) return;
+  
+  const playResults = game.playCells(activeCells);
+
+  if(playResults.gameOver) {
+    endGame();
+  }
+  if(playResults.correctPlay){
+    activeCells = [];
+    return;
+  } 
+
+  setTimeout(()=>{
+    const $cells = []
+
+    for(let cell of activeCells){
+      const $cell = document.getElementById(`cell-${cell.row}-${cell.col}`);
+      $cells.push($cell);
+    }
+
+    resetCells($cells);
+    activeCells = [];
+  },
+  500);
 }
 
-const $gameContainer = document.getElementById("Game-Container")
+function endGame(){
+  $gameContainer.removeEventListener("click", clickCell);
+  $gameContainer.innerHTML = "";
+  $gameContainer.textContent = "YOU WIN! :D"
+}
+
+function resetCells($cells){
+  for(let $cell of $cells){
+    $cell.style.backgroundColor = "";
+  }
+}
+
 $gameContainer.addEventListener("click", clickCell);

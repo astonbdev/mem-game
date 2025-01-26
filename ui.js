@@ -2,7 +2,8 @@ import { Game } from "./game.js"
 
 export default function createBoard(game){
   for(let row = 0; row < game.height; row++){
-    document.createElement
+    const $cellRow = document.createElement("div");
+
     for(let col = 0; col < game.width; col++){
       const cell = {row: row, col: col}
       const $cell = document.createElement("div");
@@ -10,8 +11,10 @@ export default function createBoard(game){
       $cell.style.backgroundColor = game.getCellState(cell);
       $cell.classList.add("cell");
       
-      const $game = document.getElementById("Game-Container");
-      $game.appendChild($cell);
+      $cellRow.appendChild($cell);
     } 
+
+    const $game = document.getElementById("Game-Container");
+    $game.appendChild($cellRow);
   }
 }

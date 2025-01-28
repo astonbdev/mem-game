@@ -1,13 +1,15 @@
-type CellProps = {id: string, color?: string};
+import { FlipCell } from "./App.tsx";
 
-export default function Cell({id, color = ""}: CellProps){
+type CellProps = {id: string, color?: string, flipCell: FlipCell};
+
+export default function Cell({id, color = "", flipCell}: CellProps){
 
   const cellColor = {
     backgroundColor: color
   }
 
   return(
-    <div id={id} className="cell" style={cellColor}></div>
+    <div id={id} className="cell" style={cellColor} onClick={flipCell}></div>
   )
 
 };
